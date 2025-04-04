@@ -157,7 +157,7 @@ export const getSuggestedUsers = async(req,res)=>{
     }
 }
 
-export const followUser = async(req,res)=>{
+export const followUserOrUnfollow = async(req,res)=>{
     try{
         const followerId = req.id;
         const followingId = req.params.id;
@@ -174,14 +174,29 @@ export const followUser = async(req,res)=>{
                 message:"User not Found",
                 success:false
             })
+        
         }
         // check follow or unfollow 
          const isFollowing = userfollower.following.includes(followingId);
           if(isFollowing){
-            
+            await Promise.all([
+            User.updateOne({_id:followerId},{$push:{following:followingId}}),
+            User.updateOne({_id:followingId},{$push:{follower:followerId}})
+            ])
+            return res.status(200).json({
+                message:"Unfollowed Succesfully",
+                success:true
+            })
           }
           else{
-
+           await Promise.all([
+            User.updateOne({_id:followerId},{$push:{following:followingId}}),
+            User.updateOne({_id:followingId},{$push:{follower:followerId}})
+           ])
+           return res.status(200).json({
+                message:"Followed Succesfully",
+                success:true
+            })
           }
     }catch(error){
         console.log(error)
