@@ -2,6 +2,7 @@ import sharp, { fit } from 'sharp';
 import cloudinary from '../utils/cloudinary';
 import { Post } from '../Models/post.model';
 import { User } from '../Models/user.model';
+import { Comment } from '../Models/comment.model';
 export const addPost = async (req, res) => {
     try{
      const {caption} = req.body;

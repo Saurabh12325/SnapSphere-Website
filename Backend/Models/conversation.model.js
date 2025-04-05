@@ -9,4 +9,4 @@ const conversationSchema = new mongoose.Schema({
         ref: "Message"
     }]
 })
-export default conversationSchema = mongoose.model('Conversation', conversationSchema)
+export const Conversation = mongoose.model('Conversation', conversationSchema)

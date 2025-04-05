@@ -11,8 +11,6 @@ const messageSchema = mongoose.Schema({
     message:{
         type:String,
         required:true
-
-        
     }
 })
-export default messageSchema = mongoose.model('Message',messageSchema)
+export const Message = mongoose.model('Message',messageSchema)
