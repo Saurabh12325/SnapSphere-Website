@@ -6,4 +6,4 @@ const commentSchema = mongoose.Schema({
 
 
 })
-export default commentSchema = mongoose.model('Comment',commentSchema)
+export default Comment = mongoose.model('Comment',commentSchema)
