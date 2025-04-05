@@ -1,6 +1,6 @@
 import { Conversation } from "../Models/conversation.model";
 import { Message } from "../Models/message.model";
-
+//sending message
 export const sendMessage = async (req, res) => {
     try{
          const senderId = req.id;
