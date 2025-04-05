@@ -34,7 +34,7 @@ export const sendMessage = async (req, res) => {
         console.log(error)
     }
 }
-
+//get messsages of a conversation
 export const getMessages = async (req, res) => {
     try{
         const senderId = req.id;
