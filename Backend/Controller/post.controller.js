@@ -1,5 +1,5 @@
-import sharp, { fit } from 'sharp';
-import cloudinary from '../utils/cloudinary';
+import sharp from 'sharp';
+import cloudinary from '../utils/cloudinary.js';
 import { Post } from '../Models/post.model.js';
 import { User } from '../Models/user.model.js';
 import { Comment } from '../Models/comment.model.js';
