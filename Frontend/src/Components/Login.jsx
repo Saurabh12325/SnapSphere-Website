@@ -5,23 +5,21 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function SignUp() {
-
-    const [username,setUserName] = useState('');
+function Login() {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('')
    
      const SubmitEvent = async(e)=>{
        e.preventDefault();
-       console.log({username,email,password});
-       if(!username || !email || !password){
+       console.log({email,password});
+       if(!email || !password){
         toast.error('Please fill all the fields! ❌')
         return;
        }
 
        try{
-         const response = await axios.post('http://localhost:8000/api/v1/user/register',{
-            username,email,password,
+         const response = await axios.post('http://localhost:8000/api/v1/user/login',{
+            email,password,
             headers:{
                 'Content-Type':'application/json'
             }
@@ -29,7 +27,7 @@ function SignUp() {
          })
          if(response.data.success){
             toast.success(response.data.message)
-            setUserName('')
+           
             setEmail('')
             setPassword('')
          }
@@ -42,20 +40,12 @@ function SignUp() {
     return (
 
         <div className='flex items-center justify-center w-screen h-screen'>
-            <form onSubmit={SubmitEvent} className='shadow-lg flex flex-col gap-5 p-8 bg-gray-100'>
+            <form onSubmit={SubmitEvent} className='shadow-lg flex flex-col gap-5 p-8  bg-gray-100'>
                 <div className='my-4'>
                     <h1 className='text-center font-extrabold text-2xl'>LOGO</h1>
-                    <p className='text-center text-xl'>Welcome to the SnapSphere! Register Yourself </p>
+                    <p className='text-center text-xl'>Welcome to the SnapSphere! Login Yourself </p>
                 </div>
-                <div>
-                    <span className='font-semibold'>Username</span>
-                   <input type="text"
-                 
-                   value={username}
-                  onChange={(e)=>setUserName(e.target.value)}
-                    placeholder='Username' 
-                    className='w-full border-2 rounded-sm py-1 my-1 ring-transparent' />
-                </div>
+             
                 <div>
                     <span className='font-semibold'>Email</span>
                    <input type="text"
@@ -76,11 +66,12 @@ function SignUp() {
                 <button
                    type='submit'
                  className='w-full bg-black border-2 rounded-lg py-1 text-white '>SignUp</button>
-             <span className='font-bold text-center'>Already have an account ?  <Link to="/login" className="text-blue-500 underline">Login</Link></span>
+                 <span className='text-center font-bold'> don't have an account? <Link to="/signup" className='text-blue-600 underline' >SignUp</Link></span>
+             
             </form>
             <ToastContainer position='top-right' autoClose={3000} />
         </div>
     )
 }
 
-export default SignUp
+export default Login
