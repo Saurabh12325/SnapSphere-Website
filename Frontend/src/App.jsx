@@ -1,4 +1,4 @@
-import { BrowserRouter, createBrowserRouter,RouterProvider } from 'react-router-dom'
+import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 import SignUp from './Components/SignUp'
 import Login from './Components/Login'
 import MainLayout from './Components/MainLayout'
@@ -13,7 +13,7 @@ const BrowserRouter = createBrowserRouter([
     children: [{
      path:"/",
      element:<Home
-       />
+     />
     }]
     
   },

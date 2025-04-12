@@ -1,11 +1,14 @@
 
 import axios from 'axios';
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 function Login() {
+    const navigate = useNavigate();
+    const [loading, setloading] = useState(false);
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('')
    
@@ -18,6 +21,7 @@ function Login() {
        }
 
        try{
+            setloading(true)
          const response = await axios.post('http://localhost:8000/api/v1/user/login',{
             email,password,
             headers:{
@@ -27,13 +31,17 @@ function Login() {
          })
          if(response.data.success){
             toast.success(response.data.message)
-           
+           setTimeout(() => {
+            navigate('/')
+           }, 1000);
             setEmail('')
             setPassword('')
          }
        }catch(error){
         console.log(error)
          toast.error('Error while registering! ❌');
+       }finally{
+        setloading(false)
        }
      }
 
@@ -62,10 +70,13 @@ function Login() {
                     placeholder='password' 
                     className='w-full border-2 rounded-sm py-1 my-1 ring-transparent' />
                 </div>
-
+                {
+                    loading ? <button className='w-full bg-black border-2 rounded-lg py-1 text-white ' disabled >Loading...</button> : 
+                
                 <button
                    type='submit'
                  className='w-full bg-black border-2 rounded-lg py-1 text-white '>SignUp</button>
+                }
                  <span className='text-center font-bold'> don't have an account? <Link to="/signup" className='text-blue-600 underline' >SignUp</Link></span>
              
             </form>
